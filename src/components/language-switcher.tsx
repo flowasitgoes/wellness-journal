@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { locales, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/types";
 
@@ -22,25 +22,43 @@ function pathWithLocale(pathname: string, target: Locale): string {
   return `/${segments.join("/")}`;
 }
 
+function navigateWithFade(href: string, router: ReturnType<typeof useRouter>) {
+  if (typeof document !== "undefined" && document.startViewTransition) {
+    document.startViewTransition(() => {
+      router.push(href);
+    });
+    return;
+  }
+  router.push(href);
+}
+
 export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <div
-      className="flex items-center gap-1 rounded-full border border-border bg-card/80 p-1 text-sm backdrop-blur-sm"
+      className="flex items-center gap-0.5 rounded-full border border-border bg-card/80 p-0.5 text-[0.6875rem] tracking-wide backdrop-blur-sm"
       role="navigation"
       aria-label="Language"
     >
       {locales.map((loc) => {
         const active = loc === locale;
+        const href = pathWithLocale(pathname, loc);
+
         return (
           <Link
             key={loc}
-            href={pathWithLocale(pathname, loc)}
-            className={`rounded-full px-3 py-1 font-medium transition-colors ${
+            href={href}
+            onClick={(e) => {
+              if (active) return;
+              e.preventDefault();
+              navigateWithFade(href, router);
+            }}
+            className={`rounded-full px-2.5 py-0.5 font-medium transition-all duration-300 ease-in-out motion-reduce:transition-none ${
               active
                 ? "bg-brand text-on-brand"
-                : "text-muted hover:text-brand"
+                : "text-muted hover:bg-brand/8 hover:text-brand"
             }`}
             aria-current={active ? "page" : undefined}
             hrefLang={loc === "zh" ? "zh-Hant" : "en"}
