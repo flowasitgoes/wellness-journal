@@ -26,7 +26,9 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <JsonLd data={websiteJsonLd(raw, dict)} />
-      <p className="brand-tagline mb-6">{dict.nav.trainingSessions}</p>
+      <p className="brand-tagline home-section-label mb-6">
+        {dict.nav.trainingSessions}
+      </p>
       {sessions.map((session) => (
         <SessionEntry
           key={session.slug}

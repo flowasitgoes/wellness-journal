@@ -31,7 +31,9 @@ export function SiteHeader({ locale, dict, showHero = false }: SiteHeaderProps) 
                 <div className="brand-divider flex-1" />
                 <BrandSmiley />
               </div>
-              <p className="brand-tagline mt-4">{dict.header.tagline}</p>
+              <p className="brand-tagline brand-tagline--hero mt-4">
+                {dict.header.tagline}
+              </p>
             </div>
           ) : (
             <span className="font-display text-2xl font-bold lowercase text-brand">
@@ -40,7 +42,7 @@ export function SiteHeader({ locale, dict, showHero = false }: SiteHeaderProps) 
           )}
         </NavLink>
         {showHero && (
-          <p className="mx-auto mt-8 max-w-lg text-[0.9375rem] leading-relaxed text-muted">
+          <p className="home-hero-intro mt-8 max-w-lg text-[0.9375rem] leading-relaxed text-muted sm:mx-auto">
             {dict.header.heroLine1}
             <br />
             {dict.header.heroLine2}

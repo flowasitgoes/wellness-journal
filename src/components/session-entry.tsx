@@ -26,11 +26,14 @@ export function SessionEntry({ session, locale, dict }: SessionEntryProps) {
           {formatDayTitle(session.dayNumber, session.title, locale)}
         </h2>
         <p className="mt-2 text-muted">
-          {t.date}: {formatSessionDate(session.date, locale)} · {t.duration}:{" "}
+          <strong className="font-semibold text-brand">{t.date}:</strong>{" "}
+          {formatSessionDate(session.date, locale)} ·{" "}
+          <strong className="font-semibold text-brand">{t.duration}:</strong>{" "}
           {session.duration}
         </p>
         <p className="mt-3 leading-[1.7] text-ink">
-          <strong className="text-brand">{t.focus}:</strong> {session.focus}
+          <strong className="font-semibold text-brand">{t.focus}:</strong>{" "}
+          {session.focus}
         </p>
         <span className="mt-5 inline-flex rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-on-brand transition-colors duration-200 hover:bg-brand-dark">
           {dict.nav.viewSession}

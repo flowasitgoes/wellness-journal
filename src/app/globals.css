@@ -61,6 +61,37 @@ body {
   color: var(--green);
 }
 
+/* Home — mobile typography & spacing (matches editorial layout on narrow screens) */
+@media (max-width: 639px) {
+  .home-hero-intro {
+    width: 100%;
+    padding: 4px 24px;
+    text-align: left;
+  }
+
+  .brand-tagline--hero,
+  .home-section-label {
+    font-weight: 600;
+  }
+
+  .home-section-label {
+    padding: 0 24px;
+    text-align: left;
+  }
+}
+
+@media (min-width: 640px) {
+  .home-hero-intro {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .home-section-label {
+    text-align: center;
+  }
+}
+
 @keyframes pageEnter {
   from {
     opacity: 0;
