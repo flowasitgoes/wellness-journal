@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/config";
+
 export type Exercise = {
   name: string;
   volume?: string;
@@ -20,10 +22,8 @@ export type ThemeItem = {
   text: string;
 };
 
-export type Session = {
-  slug: string;
-  dayNumber: number;
-  date: string;
+/** Locale-specific copy for a session */
+export type SessionContent = {
   duration: string;
   title: string;
   summary: string;
@@ -35,3 +35,18 @@ export type Session = {
   themes: ThemeItem[];
   reflection: string;
 };
+
+/** Shared metadata + per-locale content (single source of truth) */
+export type BilingualSession = {
+  slug: string;
+  dayNumber: number;
+  date: string;
+  content: Record<Locale, SessionContent>;
+};
+
+/** Resolved session for rendering */
+export type Session = {
+  slug: string;
+  dayNumber: number;
+  date: string;
+} & SessionContent;

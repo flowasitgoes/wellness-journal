@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { LocaleHtmlLang } from "@/components/locale-html-lang";
-import { SiteHeader } from "@/components/site-header";
+import { NavLink } from "@/components/nav-link";
 import { SessionDetailView } from "@/components/session-detail-view";
 import { JsonLd } from "@/components/json-ld";
 import { getAllSessionSlugs, getSessionBySlug } from "@/data/sessions";
@@ -46,23 +44,19 @@ export default async function SessionDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-page">
-      <LocaleHtmlLang locale={raw} />
+    <>
       <JsonLd data={sessionArticleJsonLd(raw, session, dict)} />
-      <main className="mx-auto max-w-[1000px] px-5 py-10 sm:px-5 sm:py-14">
-        <SiteHeader locale={raw} dict={dict} />
-        <nav aria-label="Breadcrumb" className="mb-6">
-          <Link
-            href={localePath(raw)}
-            className="inline-flex items-center text-sm font-medium text-brand-muted transition-colors hover:text-brand"
-          >
-            {dict.nav.allEntries}
-          </Link>
-        </nav>
-        <article>
-          <SessionDetailView session={session} locale={raw} dict={dict} />
-        </article>
-      </main>
-    </div>
+      <nav aria-label="Breadcrumb" className="mb-6">
+        <NavLink
+          href={localePath(raw)}
+          className="inline-flex items-center text-sm font-medium text-brand-muted transition-colors duration-200 hover:text-brand"
+        >
+          {dict.nav.allEntries}
+        </NavLink>
+      </nav>
+      <article>
+        <SessionDetailView session={session} locale={raw} dict={dict} />
+      </article>
+    </>
   );
 }

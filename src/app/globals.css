@@ -61,15 +61,23 @@ body {
   color: var(--green);
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 0.32s;
-  animation-timing-function: ease-in-out;
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: pageEnter 0.2s ease-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 0.01ms;
+  .page-enter {
+    animation: none;
   }
 }

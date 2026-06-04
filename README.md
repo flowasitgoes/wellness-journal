@@ -25,7 +25,12 @@ Open [http://localhost:3000](http://localhost:3000) (redirects to `/en`). Langua
 
 ## Content
 
-Session copy lives in `src/data/sessions.ts`. Add or edit entries there; slugs power static routes under `/sessions/[slug]`.
+Bilingual sessions live under `src/data/sessions/`:
+
+- `day06.ts` — shared slug/date + `content.en` / `content.zh`
+- `registry.ts` — register new sessions in `sessionRegistry`
+
+Add a session: copy `day06.ts`, then append to `registry.ts`.
 
 ## SEO
 

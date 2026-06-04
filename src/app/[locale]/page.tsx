@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation";
-import { LocaleHtmlLang } from "@/components/locale-html-lang";
-import { SiteHeader } from "@/components/site-header";
 import { SessionEntry } from "@/components/session-entry";
 import { JsonLd } from "@/components/json-ld";
 import { getSessions } from "@/data/sessions";
@@ -23,24 +21,20 @@ export default async function HomePage({ params }: PageProps) {
   if (!isLocale(raw)) notFound();
 
   const dict = getDictionary(raw);
-  const sorted = [...getSessions(raw)].sort((a, b) => b.dayNumber - a.dayNumber);
+  const sessions = getSessions(raw);
 
   return (
-    <div className="min-h-screen bg-page">
-      <LocaleHtmlLang locale={raw} />
+    <>
       <JsonLd data={websiteJsonLd(raw, dict)} />
-      <main className="mx-auto max-w-[1000px] px-5 py-10 sm:px-5 sm:py-14">
-        <SiteHeader locale={raw} dict={dict} showHero />
-        <p className="brand-tagline mb-6">{dict.nav.trainingSessions}</p>
-        {sorted.map((session) => (
-          <SessionEntry
-            key={session.slug}
-            session={session}
-            locale={raw}
-            dict={dict}
-          />
-        ))}
-      </main>
-    </div>
+      <p className="brand-tagline mb-6">{dict.nav.trainingSessions}</p>
+      {sessions.map((session) => (
+        <SessionEntry
+          key={session.slug}
+          session={session}
+          locale={raw}
+          dict={dict}
+        />
+      ))}
+    </>
   );
 }

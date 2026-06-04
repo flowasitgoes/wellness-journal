@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { locales, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/types";
 
@@ -22,19 +23,17 @@ function pathWithLocale(pathname: string, target: Locale): string {
   return `/${segments.join("/")}`;
 }
 
-function navigateWithFade(href: string, router: ReturnType<typeof useRouter>) {
-  if (typeof document !== "undefined" && document.startViewTransition) {
-    document.startViewTransition(() => {
-      router.push(href);
-    });
-    return;
-  }
-  router.push(href);
-}
-
 export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    locales.forEach((loc) => {
+      if (loc !== locale) {
+        router.prefetch(pathWithLocale(pathname, loc));
+      }
+    });
+  }, [pathname, locale, router]);
 
   return (
     <div
@@ -50,12 +49,9 @@ export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
           <Link
             key={loc}
             href={href}
-            onClick={(e) => {
-              if (active) return;
-              e.preventDefault();
-              navigateWithFade(href, router);
-            }}
-            className={`rounded-full px-2.5 py-0.5 font-medium transition-all duration-300 ease-in-out motion-reduce:transition-none ${
+            prefetch
+            scroll={false}
+            className={`rounded-full px-2.5 py-0.5 font-medium transition-all duration-200 ease-out motion-reduce:transition-none ${
               active
                 ? "bg-brand text-on-brand"
                 : "text-muted hover:bg-brand/8 hover:text-brand"

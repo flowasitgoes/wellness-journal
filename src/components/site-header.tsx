@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { BrandSmiley } from "@/components/brand-mark";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { NavLink } from "@/components/nav-link";
 import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/types";
 
@@ -18,7 +18,7 @@ export function SiteHeader({ locale, dict, showHero = false }: SiteHeaderProps) 
       </div>
 
       <header className={showHero ? "mb-10 pt-12 text-center sm:mb-12 sm:pt-14" : "mb-8 pt-12"}>
-        <Link
+        <NavLink
           href={localePath(locale)}
           className={`inline-block ${showHero ? "w-full" : ""}`}
         >
@@ -38,7 +38,7 @@ export function SiteHeader({ locale, dict, showHero = false }: SiteHeaderProps) 
               journal
             </span>
           )}
-        </Link>
+        </NavLink>
         {showHero && (
           <p className="mx-auto mt-8 max-w-lg text-[0.9375rem] leading-relaxed text-muted">
             {dict.header.heroLine1}
