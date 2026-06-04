@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="Wellness Journal">
+  <rect width="180" height="180" fill="#e6e2d3"/>
+  <circle cx="90" cy="90" r="68" fill="#3d5239" stroke="#2f4230" stroke-width="3"/>
+  <circle cx="67" cy="78" r="9" fill="#ffffff"/>
+  <circle cx="113" cy="78" r="9" fill="#ffffff"/>
+  <path d="M62 106c9 12 47 12 56 0" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+</svg>
